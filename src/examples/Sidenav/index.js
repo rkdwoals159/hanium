@@ -134,9 +134,9 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           </ArgonTypography>
         </ArgonBox>
         <ArgonBox component={NavLink} to="/" display="flex" alignItems="center">
-          {brand && (
+          {/* {brand && (
             <ArgonBox component="img" src={brand} alt="Argon Logo" width="2rem" mr={0.25} />
-          )}
+          )} */}
           <ArgonBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
@@ -146,6 +146,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
               variant="button"
               fontWeight="medium"
               color={darkSidenav ? "white" : "dark"}
+              style={{ fontSize: '12px' }}
             >
               {brandName}
             </ArgonTypography>
@@ -155,9 +156,9 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       <Divider light={darkSidenav} />
       <List>{renderRoutes}</List>
 
-      <ArgonBox pt={1} mt="auto" mb={2} mx={2}>
+      {/* <ArgonBox pt={1} mt="auto" mb={2} mx={2}>
         <SidenavFooter />
-      </ArgonBox>
+      </ArgonBox> */}
     </SidenavRoot>
   );
 }

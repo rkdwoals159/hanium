@@ -64,7 +64,7 @@ export default styled(Badge)(({ theme, ownerState }) => {
       width: widthValue,
       height: heightValue,
       display: "grid",
-      placeItems: "center",
+      placeitems: "center",
       textAlign: "center",
       borderRadius: "50%",
       padding: 0,

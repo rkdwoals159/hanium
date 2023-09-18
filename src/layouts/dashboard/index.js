@@ -41,14 +41,20 @@ import Slider from "layouts/dashboard/components/Slider";
 import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData";
 import salesTableData from "layouts/dashboard/data/salesTableData";
 import categoriesListData from "layouts/dashboard/data/categoriesListData";
+import ProfilesList from "examples/Lists/ProfilesList";
+import profilesListData from "layouts/profile/data/profilesListData";
+import authorsTableData from "layouts/tables/data/authorsTableData";
+import Table from "examples/Tables/Table";
+import SocketComponent from "components/RTCSocket";
 
 function Default() {
   const { size } = typography;
+  const { columns, rows } = authorsTableData;
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <ArgonBox py={3}>
-        <Grid container spacing={3} mb={3}>
+        {/* <Grid container spacing={3} mb={3}>
           <Grid item xs={12} md={6} lg={3}>
             <DetailedStatisticsCard
               title="today's money"
@@ -81,10 +87,11 @@ function Default() {
               percentage={{ color: "success", count: "+5%", text: "than last month" }}
             />
           </Grid>
-        </Grid>
+        </Grid> */}
         <Grid container spacing={3} mb={3}>
           <Grid item xs={12} lg={7}>
-            <GradientLineChart
+            <SocketComponent></SocketComponent>
+            {/* <GradientLineChart
               title="Sales Overview"
               description={
                 <ArgonBox display="flex" alignItems="center">
@@ -100,22 +107,27 @@ function Default() {
                 </ArgonBox>
               }
               chart={gradientLineChartData}
-            />
+            /> */}
+            
           </Grid>
           <Grid item xs={12} lg={5}>
-            <Slider />
+          {/* <Table columns={columns} rows={rows} /> */}
+            {/* <CategoriesList title="categories" categories={categoriesListData} /> */}
+            {/* <ProfilesList title="conversations" profiles={profilesListData} /> */}
+            {/* <Slider /> */}
+            <SalesTable title="Sales by Country" rows={salesTableData} />
           </Grid>
         </Grid>
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
             <SalesTable title="Sales by Country" rows={salesTableData} />
           </Grid>
           <Grid item xs={12} md={4}>
             <CategoriesList title="categories" categories={categoriesListData} />
           </Grid>
-        </Grid>
+        </Grid> */}
       </ArgonBox>
-      <Footer />
+      {/* <Footer /> */}
     </DashboardLayout>
   );
 }
