@@ -32,46 +32,37 @@ import ArgonBox from "components/ArgonBox";
 // Argon Dashboard 2 MUI example components
 import SalesTableCell from "examples/Tables/SalesTable/SalesTableCell";
 
-function SalesTable({ title, rows }) {
-  const renderTableCells = rows.map((row, key) => {
-    const tableRows = [];
+function SalesTable({ socketData, title }) {
+  const renderTableCells = socketData ? socketData.map((data, key) => {
     const rowKey = `row-${key}`;
-
-    Object.entries(row).map(([cellTitle, cellContent]) =>
-      Array.isArray(cellContent)
-        ? tableRows.push(
-            <SalesTableCell
-              key={cellContent[1]}
-              title={cellTitle}
-              content={cellContent[1]}
-              image={cellContent[0]}
-              noBorder={key === rows.length - 1}
-            />
-          )
-        : tableRows.push(
-            <SalesTableCell
-              key={cellContent}
-              title={cellTitle}
-              content={cellContent}
-              noBorder={key === rows.length - 1}
-            />
-          )
-    );
-
+    const cellKey = [`cell-${key}-1`,`cell-${key}-2`];
+    const tableRows = [
+      <SalesTableCell
+      key={cellKey[0]}
+      title={"Uuid"}
+      content={data.uuid}
+    />,
+    <SalesTableCell
+    key={cellKey[1]}
+    title={"결과"}
+    content={data.anomal_TF ? "정상" : "비정상"}
+  />
+    ]
+    
     return <TableRow key={rowKey}>{tableRows}</TableRow>;
-  });
+  }) : [];
 
   return (
     <TableContainer sx={{ height: "100%" }}>
       <Table>
         <TableHead>
           <ArgonBox component="tr" width="max-content" display="block" mb={1.5}>
-            <ArgonTypography variant="h6" component="td">
+            <ArgonTypography color="inherit" fontWeight="bold" variant="h6" component="td">
               {title}
             </ArgonTypography>
           </ArgonBox>
         </TableHead>
-        <TableBody>{useMemo(() => renderTableCells, [rows])}</TableBody>
+        <TableBody>{useMemo(() => renderTableCells, [socketData])}</TableBody>
       </Table>
     </TableContainer>
   );
@@ -79,13 +70,13 @@ function SalesTable({ title, rows }) {
 
 // Setting default values for the props of SalesTable
 SalesTable.defaultProps = {
-  rows: [{}],
+  socketData: [],
 };
 
 // Typechecking props for the SalesTable
 SalesTable.propTypes = {
   title: PropTypes.string.isRequired,
-  rows: PropTypes.arrayOf(PropTypes.object),
+  socketData : PropTypes.arrayOf(PropTypes.object),
 };
 
 export default SalesTable;

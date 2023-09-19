@@ -115,5 +115,6 @@ export default styled(Box)(({ theme, ownerState }) => {
     color: colorValue,
     borderRadius: borderRadiusValue,
     boxShadow: boxShadowValue,
+    zIndex : -100
   };
 });

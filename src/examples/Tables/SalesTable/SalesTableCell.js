@@ -38,7 +38,7 @@ function SalesTableCell({ title, content, image, noBorder, ...rest }) {
               fontWeight="medium"
               textTransform="capitalize"
             >
-              {title}:
+              {title}
             </ArgonTypography>
             <ArgonTypography variant="button" fontWeight="medium" textTransform="capitalize">
               {content}
@@ -57,7 +57,7 @@ function SalesTableCell({ title, content, image, noBorder, ...rest }) {
             fontWeight="medium"
             textTransform="capitalize"
           >
-            {title}:
+            {title}
           </ArgonTypography>
           <ArgonTypography variant="button" fontWeight="medium" textTransform="capitalize">
             {content}

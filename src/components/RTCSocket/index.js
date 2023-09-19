@@ -1,50 +1,35 @@
 import React, { useState, useEffect } from "react";
-
-const SocketComponent = () => {
-  const [socket, setSocket] = useState(null);
-
-  useEffect(() => {
-    const newSocket = new WebSocket("ws://localhost:12345/ws");
-    setSocket(newSocket);
-
-    return () => {
-      if (newSocket) {
-        newSocket.close();
-      }
-    };
-  }, []);
+import CanvasDisplay from "./CanvasDisplay";
+import PropTypes  from "prop-types";
+const SocketComponent = ({setSocketData}) => {
+  const [canvasImage, setCanvasImage] = useState(null);
 
   useEffect(() => {
-    const canvas = document.getElementById("canvas");
-    const context = canvas.getContext("2d");
-    const handleMessage = (event) => {
+    const socket = new WebSocket("ws://localhost:12345/ws");
+
+    socket.addEventListener("message", (event) => {
       const data = JSON.parse(event.data);
+      console.log(data)
+      setSocketData((prevData)=>[...prevData, data.text]);      
       const image = new Image();
       image.src = `data:image/jpeg;base64,${data.image}`;
       image.onload = () => {
-        context.fillStyle = "white";
-        context.fillRect(0, 0, 640, 480);
-        context.drawImage(image, 0, 0, 640, 480);
+        setCanvasImage(image);
       };
-    };
-
-    if (socket) {
-      socket.addEventListener("message", handleMessage);
-    }
+    });
 
     return () => {
-      if (socket) {
-        socket.removeEventListener("message", handleMessage);
-      }
+      socket.close();
     };
-  }, [socket]);
+  }, []);
 
   return (
     <div className="canvas-container">
-      <div>여기에용</div>
-      <canvas id="canvas" width="640" height="480"></canvas>
+      <CanvasDisplay image={canvasImage} />
     </div>
   );
 };
-
+SocketComponent.propTypes = {
+  setSocketData: PropTypes.func.isRequired,
+};
 export default SocketComponent;

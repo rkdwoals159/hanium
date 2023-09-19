@@ -39,17 +39,21 @@ import Slider from "layouts/dashboard/components/Slider";
 
 // Data
 import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData";
-import salesTableData from "layouts/dashboard/data/salesTableData";
+// import salesTableData from "layouts/dashboard/data/salesTableData";
 import categoriesListData from "layouts/dashboard/data/categoriesListData";
 import ProfilesList from "examples/Lists/ProfilesList";
 import profilesListData from "layouts/profile/data/profilesListData";
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import Table from "examples/Tables/Table";
 import SocketComponent from "components/RTCSocket";
-
+import { useEffect, useState } from "react";
 function Default() {
   const { size } = typography;
   const { columns, rows } = authorsTableData;
+  const [socketData, setSocketData] = useState([]);
+  useEffect(() => {
+    
+  }, [socketData])
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -90,7 +94,7 @@ function Default() {
         </Grid> */}
         <Grid container spacing={3} mb={3}>
           <Grid item xs={12} lg={7}>
-            <SocketComponent></SocketComponent>
+            <SocketComponent setSocketData={setSocketData}></SocketComponent>
             {/* <GradientLineChart
               title="Sales Overview"
               description={
@@ -115,7 +119,7 @@ function Default() {
             {/* <CategoriesList title="categories" categories={categoriesListData} /> */}
             {/* <ProfilesList title="conversations" profiles={profilesListData} /> */}
             {/* <Slider /> */}
-            <SalesTable title="Sales by Country" rows={salesTableData} />
+            <SalesTable socketData={socketData} title="Real-time Results" />
           </Grid>
         </Grid>
         {/* <Grid container spacing={3}>
