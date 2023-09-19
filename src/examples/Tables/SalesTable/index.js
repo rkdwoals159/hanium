@@ -25,7 +25,7 @@ function SalesTable({ socketData, title }) {
         const cellKey = [`cell-${key}-1`, `cell-${key}-2`];
         const tableRows = [
           <SalesTableCell key={`cell-${key}-1`} title={"Uuid"} content={data.uuid} />,
-          <SalesTableCell key={`cell-${key}-2`} title={"결과"} content={data.anomal_TF ? "정상" : "비정상"} />,
+          <SalesTableCell key={`cell-${key}-2`} title={"결과"} content={data.anomal_TF=== false ? "정상" : "비정상"} />,
           <TableCell TableCell key={`cell-${key}-3`} align="center">
             <ArgonBox display="flex" flexDirection="column">
               <ArgonTypography variant="button" fontWeight="medium" color="warning" textTransform="capitalize">
@@ -34,8 +34,9 @@ function SalesTable({ socketData, title }) {
             </ArgonBox>
           </TableCell>,
         ];
-
-        return <TableRow key={rowKey}>{tableRows}</TableRow>;
+        if (data.is_detected === true) {
+          return <TableRow key={rowKey}>{tableRows}</TableRow>;  
+        }
       })
     : [];
 

@@ -51,9 +51,6 @@ function Default() {
   const { size } = typography;
   const { columns, rows } = authorsTableData;
   const [socketData, setSocketData] = useState([]);
-  useEffect(() => {
-    
-  }, [socketData])
   return (
     <DashboardLayout>
       <DashboardNavbar />
